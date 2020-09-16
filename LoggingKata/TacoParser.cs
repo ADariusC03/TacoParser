@@ -9,7 +9,7 @@
         
         public ITrackable Parse(string line)
         {
-            logger.LogInfo("Begin parsing");
+            //logger.LogInfo("Begin parsing");
 
             // Take your line and use line.Split(',') to split it up into an array of strings, separated by the char ','
             var cells = line.Split(',');
@@ -40,19 +40,21 @@
             //DONE-- Then, you'll need an instance of the TacoBell class
             // With the name and point set correctly
 
-            var point = new Point();
-            point.Latitude = lat;
-            point.Latitude = longitude;
+            // var locationPoint = new Point();
+            // locationPoint.Latitude = lat;
+            // locationPoint.Latitude = longitude;
 
-            var tacoBell = new TacoBell();
-            tacoBell.Name = tacoBellName;
-            tacoBell.Location = point;
+            //var tacoBell = new TacoBell();
+              //tacoBell.Name = tacoBellName;
+            //tacoBell.Location = locationPoint;
+            var location = new Point() { Latitude = lat, Longitude = longitude };
+            var tb = new TacoBell() { Name = tacoBellName, Location = location };
 
 
             //DONE-- Then, return the instance of your TacoBell class
             // Since it conforms to ITrackable
 
-            return tacoBell;
+            return tb;
         }
     }
 }

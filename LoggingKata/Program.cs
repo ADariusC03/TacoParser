@@ -60,7 +60,7 @@ namespace LoggingKata
                 var locA = locations[i];
                 var corA = new GeoCoordinate(locA.Location.Latitude, locA.Location.Longitude);
 
-                for (int x = 0; x < locations.Length; x++)
+                for (int x = 1; x < locations.Length; x++)
                 {
                     var locB = locations[x];
                     var corB = new GeoCoordinate(locB.Location.Latitude, locB.Location.Longitude);
