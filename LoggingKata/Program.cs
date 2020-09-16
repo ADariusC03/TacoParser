@@ -23,6 +23,15 @@ namespace LoggingKata
 
             logger.LogInfo($"Lines: {lines[0]}");
 
+            if (lines.Count() == 0)
+            {
+                logger.LogError("0 lines read from CSV file");
+            }
+            else if (lines.Count() == 1)
+            {
+                logger.LogWarning("1 line read from CSV file");
+            }
+
             // Create a new instance of your TacoParser class
             var parser = new TacoParser();
 
@@ -36,11 +45,36 @@ namespace LoggingKata
             // TODO: Create two `ITrackable` variables with initial values of `null`. These will be used to store your two taco bells that are the farthest from each other.
             // Create a `double` variable to store the distance
 
+            ITrackable tacoBellA = null;
+            ITrackable tacoBellB = null;
+
+            double distance = 0;
+
             // Include the Geolocation toolbox, so you can compare locations: `using GeoCoordinatePortable;`
 
             //HINT NESTED LOOPS SECTION---------------------
             // Do a loop for your locations to grab each location as the origin (perhaps: `locA`)
 
+            for (int i = 0; i < locations.Length; i++)
+            {
+                var locA = locations[i];
+                var corA = new GeoCoordinate(locA.Location.Latitude, locA.Location.Longitude);
+
+                for (int x = 0; x < locations.Length; x++)
+                {
+                    var locB = locations[x];
+                    var corB = new GeoCoordinate(locB.Location.Latitude, locB.Location.Longitude);
+
+                    if (corA.GetDistanceTo(corB) > distance)
+                    {
+                        distance = corA.GetDistanceTo(corB);
+                        tacoBellA = locA;
+                        tacoBellB = locB;
+                    }
+                }
+            }
+
+            Console.WriteLine($"{tacoBellA.Name} and {tacoBellB.Name} are the furthest aprt from each other.");
             // Create a new corA Coordinate with your locA's lat and long
 
             // Now, do another loop on the locations with the scope of your first loop, so you can grab the "destination" location (perhaps: `locB`)
@@ -53,7 +87,7 @@ namespace LoggingKata
             // Once you've looped through everything, you've found the two Taco Bells farthest away from each other.
 
 
-            
+
         }
     }
 }
