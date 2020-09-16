@@ -73,8 +73,55 @@ namespace LoggingKata
                     }
                 }
             }
-
+            Console.WriteLine(".");
+            Console.WriteLine(".");
+            Console.WriteLine(".");
+            Console.WriteLine("----------FURTHEST AWAY----------");
+            Console.WriteLine("");
             Console.WriteLine($"{tacoBellA.Name} and {tacoBellB.Name} are the furthest aprt from each other.");
+            Console.WriteLine(".");
+            Console.WriteLine($"They're {Math.Round((distance / 1609.344), 2)} miles of each other.");
+            Console.WriteLine(".");
+            Console.WriteLine(".");
+
+            //Going from meters to miles
+
+            ITrackable tacoBellC = null;
+            ITrackable tacoBellD = null;
+
+            double shortDistance = 9999999999999999999;
+
+            for (int r = 0; r < locations.Length; r++)
+            {
+                var locC = locations[r];
+                var corC = new GeoCoordinate(locC.Location.Latitude, locC.Location.Longitude);
+
+                for (int s = 1; s < locations.Length; s++)
+                {
+                    var locD = locations[s];
+                    var corD = new GeoCoordinate(locD.Location.Latitude, locD.Location.Longitude);
+
+                    if (corC.GetDistanceTo(corD) < shortDistance && corC.GetDistanceTo(corD) !=0)
+                    {
+                        shortDistance = corC.GetDistanceTo(corD);
+                        tacoBellC = locC;
+                        tacoBellD = locD;
+                    }
+                    
+                }
+            }
+
+            Console.WriteLine("!");
+            Console.WriteLine("!");
+            Console.WriteLine(".");
+            Console.WriteLine("----------CLOSES TO EACH OTHER----------");
+            Console.WriteLine("");
+            Console.WriteLine($"{tacoBellC.Name} and {tacoBellD.Name} are shorter miles from each other.");
+            Console.WriteLine(".");
+            Console.WriteLine($"They are {Math.Round((shortDistance/ 1609.344), 2)} miles from each other.");
+            Console.WriteLine("!");
+            Console.WriteLine(".");
+            Console.WriteLine("!");
             // Create a new corA Coordinate with your locA's lat and long
 
             // Now, do another loop on the locations with the scope of your first loop, so you can grab the "destination" location (perhaps: `locB`)
